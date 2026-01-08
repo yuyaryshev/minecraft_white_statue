@@ -1,0 +1,79 @@
+{
+  "mod_elements": [
+    {
+      "name": "WhiteStatue",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "white_statue",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/whitestatue/block/WhiteStatueBlock.java",
+          "src/main/resources/assets/whitestatue/blockstates/white_statue.json",
+          "src/main/resources/assets/whitestatue/models/block/white_statue.json",
+          "src/main/resources/assets/whitestatue/models/item/white_statue.json",
+          "src/main/resources/data/whitestatue/loot_tables/blocks/white_statue.json"
+        ]
+      }
+    },
+    {
+      "name": "WhiteStatueTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "white_statue_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/whitestatue/procedures/WhiteStatueTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "tag_elements": {},
+  "tab_element_order": {},
+  "language_map": {
+    "en_us": {
+      "block.whitestatue.white_statue": "White Statue"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
+  },
+  "workspaceSettings": {
+    "modid": "whitestatue",
+    "modName": "WhiteStatue",
+    "version": "1.0.0",
+    "author": "Administrator, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "Not specified",
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.20.1",
+    "modElementsPackage": "net.mcreator.whitestatue"
+  },
+  "mcreatorVersion": 202400452410
+}

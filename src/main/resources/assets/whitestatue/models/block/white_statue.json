@@ -1,0 +1,9 @@
+{
+  "parent": "whitestatue:custom/white_statue",
+  "textures": {
+    "all": "whitestatue:block/white_statue",
+    "particle": "whitestatue:block/white_statue",
+    "0": "whitestatue:block/white_statue"
+  },
+  "render_type": "solid"
+}
