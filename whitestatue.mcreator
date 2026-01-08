@@ -47,7 +47,14 @@
       }
     }
   ],
-  "variable_elements": [],
+  "variable_elements": [
+    {
+      "name": "UnknownEntityRegId",
+      "type": "string",
+      "scope": "global",
+      "value": "\"\""
+    }
+  ],
   "sound_elements": [],
   "tag_elements": {},
   "tab_element_order": {},
