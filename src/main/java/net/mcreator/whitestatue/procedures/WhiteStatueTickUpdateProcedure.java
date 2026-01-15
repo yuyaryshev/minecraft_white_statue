@@ -20,9 +20,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 
 import net.mcreator.whitestatue.network.WhitestatueModVariables;
 import net.mcreator.whitestatue.configuration.WhiteStatueMainConfigConfiguration;
+import net.mcreator.whitestatue.util.WhiteStatueRegistry;
+import net.mcreator.whitestatue.init.WhitestatueModBlocks;
 
 import java.util.List;
 import java.util.Comparator;
@@ -32,6 +35,18 @@ public class WhiteStatueTickUpdateProcedure {
 		double d = 0;
 		double r = 0;
 		String entityRegId = "";
+		if (world instanceof ServerLevel _serverLevel) {
+			BlockPos pos = BlockPos.containing(x, y, z);
+			int limit = WhiteStatueMainConfigConfiguration.STATUE_LIMIT.get();
+			boolean allowed = WhiteStatueRegistry.tryRegister(_serverLevel, pos, limit);
+			if (!allowed && _serverLevel.getBlockState(pos).getBlock() == WhitestatueModBlocks.WHITE_STATUE.get()) {
+				_serverLevel.removeBlock(pos, false);
+				if (_serverLevel.getServer() != null) {
+					_serverLevel.getServer().getPlayerList().broadcastSystemMessage(Component.literal("White Statue limit reached (" + limit + ")."), false);
+				}
+				return;
+			}
+		}
 		r = 12;
 		{
 			final Vec3 _center = new Vec3(x, y, z);

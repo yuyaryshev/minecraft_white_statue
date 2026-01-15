@@ -20,6 +20,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.mcreator.whitestatue.init.WhitestatueModTabs;
 import net.mcreator.whitestatue.init.WhitestatueModItems;
 import net.mcreator.whitestatue.init.WhitestatueModBlocks;
+import net.mcreator.whitestatue.util.WhiteStatueRegistry;
 
 import java.util.function.Supplier;
 import java.util.function.Function;
@@ -29,6 +30,9 @@ import java.util.List;
 import java.util.Collection;
 import java.util.ArrayList;
 import java.util.AbstractMap;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 
 @Mod("whitestatue")
 public class WhitestatueMod {
@@ -52,6 +56,9 @@ public class WhitestatueMod {
 	}
 
 	// Start of user code block mod methods
+	public static boolean isNearWhiteStatue(ServerLevel level, BlockPos pos, int rangeHorizontal, int maxAltitudeDifference) {
+		return WhiteStatueRegistry.isNear(level, pos, rangeHorizontal, maxAltitudeDifference);
+	}
 	// End of user code block mod methods
 	private static final String PROTOCOL_VERSION = "1";
 	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation(MODID, MODID), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
