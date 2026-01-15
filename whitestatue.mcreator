@@ -45,6 +45,18 @@
           }
         ]
       }
+    },
+    {
+      "name": "WhiteStatueMainConfig",
+      "type": "config",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "white_statue_main_config",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/whitestatue/configuration/WhiteStatueMainConfigConfiguration.java"
+        ]
+      }
     }
   ],
   "variable_elements": [

@@ -22,6 +22,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.client.Minecraft;
 
 import net.mcreator.whitestatue.network.WhitestatueModVariables;
+import net.mcreator.whitestatue.configuration.WhiteStatueMainConfigConfiguration;
 
 import java.util.List;
 import java.util.Comparator;
@@ -37,17 +38,20 @@ public class WhiteStatueTickUpdateProcedure {
 			List<Entity> _entfound = world.getEntitiesOfClass(Entity.class, new AABB(_center, _center).inflate(r / 2d), e -> true).stream().sorted(Comparator.comparingDouble(_entcnd -> _entcnd.distanceToSqr(_center))).toList();
 			for (Entity entityiterator : _entfound) {
 				entityRegId = ForgeRegistries.ENTITY_TYPES.getKey(entityiterator.getType()).toString();
-				if (!((entityiterator instanceof TamableAnimal _tamEnt ? _tamEnt.isTame() : false) || "minecraft:player;corpse:corpse".contains(entityRegId)) && (entityiterator instanceof Mob _mobEnt2 && _mobEnt2.isAggressive()
-						|| entityiterator instanceof LivingEntity _livEnt3 && _livEnt3.getMobType() == MobType.UNDEAD || entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("minecraft:skeletons")))
-						|| entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("minecraft:zombies"))) || "minecraft:spider;".contains(entityRegId) || false)) {
+				if (!((entityiterator instanceof TamableAnimal _tamEnt ? _tamEnt.isTame() : false) || (WhiteStatueMainConfigConfiguration.WHITELISTED.get()).contains(entityRegId))
+						&& ((WhiteStatueMainConfigConfiguration.BLACKLISTED.get()).contains(entityRegId) || false || entityiterator instanceof Mob _mobEnt4 && _mobEnt4.isAggressive()
+								|| entityiterator instanceof LivingEntity _livEnt5 && _livEnt5.getMobType() == MobType.UNDEAD || entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("minecraft:skeletons")))
+								|| entityiterator.getType().is(TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("minecraft:zombies"))))) {
 					if (world instanceof ServerLevel _level)
 						_level.sendParticles(ParticleTypes.GLOW, (entityiterator.getX()), (entityiterator.getY()), (entityiterator.getZ()), 10, 1, 1, 1, 1);
 					if (!entityiterator.level().isClientSide())
 						entityiterator.discard();
 				} else {
-					if (!world.isClientSide() && world.getServer() != null)
-						world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Ignoreing entity near WhiteStatue, regId=" + entityRegId)), false);
-					WhitestatueModVariables.UnknownEntityRegId = WhitestatueModVariables.UnknownEntityRegId + ";" + entityRegId;
+					if (!WhitestatueModVariables.UnknownEntityRegId.contains(entityRegId)) {
+						if (!world.isClientSide() && world.getServer() != null)
+							world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Ignoreing entity near WhiteStatue, regId=" + entityRegId)), false);
+						WhitestatueModVariables.UnknownEntityRegId = WhitestatueModVariables.UnknownEntityRegId + ";" + entityRegId;
+					}
 				}
 				if (new Object() {
 					public boolean checkGamemode(Entity _ent) {
